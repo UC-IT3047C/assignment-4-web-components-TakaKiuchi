@@ -1,75 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Custom Web Component</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Menu</title>
 </head>
 <body>
-  <!-- Custom web component with attributes -->
-  <my-component text="Hello, Web Component!" style="color: blue; font-size: 20px;">
-    <!-- Assign content to specific slots -->
-    <span slot="header">This is the header content</span>
-    <span slot="footer">This is the footer content</span>
-  </my-component>
 
-  <template id="my-component-template">
+<!-- Game Menu Web Component -->
+<my-component text="Welcome to the Adventure Game!" style="background-color: #222; color: #fff; font-size: 20px;">
+    <!-- Header Slot: Game Title / Logo -->
+    <h1 slot="header">Adventure Game</h1>
+    
+    <!-- Body Slot: Game Options (Buttons) -->
+    <div slot="body">
+        <button>Start Game</button>
+        <button>Settings</button>
+        <button>High Scores</button>
+    </div>
+    
+    <!-- Footer Slot: Credits or Version Info -->
+    <div slot="footer">
+        <p>Created by: Your Name</p>
+        <p>Version 1.0</p>
+    </div>
+</my-component>
+
+<!-- Web Component Template -->
+<template id="my-component-template">
     <style>
-      :host {
-        display: block;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        background-color: #f9f9f9;
-      }
-
-      .header {
-        font-weight: bold;
-        color: darkblue;
-      }
-
-      .footer {
-        color: darkgreen;
-        font-style: italic;
-      }
+        :host {
+            display: block;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .header {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .body {
+            margin-bottom: 20px;
+        }
+        .footer {
+            font-size: 0.9rem;
+            color: #bbb;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #555;
+        }
     </style>
-
     <div class="header">
-      <!-- Slot for header content -->
-      <slot name="header">Default Header</slot>
+        <slot name="header">Default Header</slot>
     </div>
     <div class="body">
-      <p>
-        <!-- Default content in body slot -->
-        <slot></slot>
-      </p>
+        <slot name="body">Default Body</slot>
     </div>
     <div class="footer">
-      <!-- Slot for footer content -->
-      <slot name="footer">Default Footer</slot>
+        <slot name="footer">Default Footer</slot>
     </div>
-  </template>
+</template>
 
-  <script>
+<script>
     class MyComponent extends HTMLElement {
-      constructor() {
-        super();
-        const template = document.getElementById('my-component-template');
-        const templateContent = template.content;
-        this.attachShadow({mode: 'open'}).appendChild(templateContent.cloneNode(true));
+        constructor() {
+            super();
+            const template = document.getElementById('my-component-template');
+            const templateContent = template.content;
+            this.attachShadow({mode: 'open'}).appendChild(templateContent.cloneNode(true));
 
-        // Set text content and style from properties
-        const text = this.getAttribute('text');
-        const style = this.getAttribute('style');
-        
-        this.shadowRoot.querySelector('.body p').textContent = text;
-        this.style.cssText = style;
-      }
+            const text = this.getAttribute('text');
+            const style = this.getAttribute('style');
+            this.shadowRoot.querySelector('.body').textContent = text;
+            this.style.cssText = style;
+        }
     }
-
-    // Define the custom element
     customElements.define('my-component', MyComponent);
-  </script>
+</script>
+
 </body>
 </html>
 
