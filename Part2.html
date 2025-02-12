@@ -3,12 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Menu</title>
+    <title>Adventure Game Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1c1c1c;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: #ffcc00;
+            text-align: center;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        button {
+            background-color: #333;
+            color: #ffcc00;
+            border: 2px solid #ffcc00;
+            padding: 10px 20px;
+            font-size: 1.2rem;
+            margin: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #ffcc00;
+            color: #333;
+            transform: scale(1.1);
+        }
+
+        footer {
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 30px;
+        }
+    </style>
 </head>
 <body>
 
 <!-- Game Menu Web Component -->
-<my-component text="Welcome to the Adventure Game!" style="background-color: #222; color: #fff; font-size: 20px;">
+<my-component text="Welcome to the Adventure Game!" style="background-color: #333; color: #fff; font-size: 20px;">
     <!-- Header Slot: Game Title / Logo -->
     <h1 slot="header">Adventure Game</h1>
     
@@ -21,7 +63,7 @@
     
     <!-- Footer Slot: Credits or Version Info -->
     <div slot="footer">
-        <p>Created by: Your Name</p>
+        <p>Created by: Taka Kiuchi</p>
         <p>Version 1.0</p>
     </div>
 </my-component>
