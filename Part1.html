@@ -1,39 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Part 1 - Web Component</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Web Component</title>
 </head>
 <body>
-    <my-component text="Hello, Web Component!" style="background-color: lightblue; font-size: 20px;">
-        <span slot="header">This is the header content</span>
-        <div slot="body">This is the body content</div>
-    </my-component>
+  <!-- Custom web component -->
+  <my-component text="Hello, Web Component!" style="color: blue; font-size: 20px;">
+    <span slot="header">Header Slot Content</span>
+    <span slot="footer">Footer Slot Content</span>
+  </my-component>
 
-    <script>
-        class MyComponent extends HTMLElement {
-            constructor() {
-                super();
-                this.attachShadow({ mode: 'open' });
-                this.shadowRoot.innerHTML = `
-                    <style>
-                        div {
-                            padding: 10px;
-                            border-radius: 5px;
-                            box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-                        }
-                    </style>
-                    <div style="${this.getAttribute('style')}">
-                        <h1><slot name="header"></slot></h1>
-                        <p><slot name="body"></slot></p>
-                        <p>${this.getAttribute('text')}</p>
-                    </div>
-                `;
-            }
-        }
+  <template id="my-component-template">
+    <style>
+      :host {
+        display: block;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
 
-        customElements.define('my-component', MyComponent);
-    </script>
+      .header {
+        font-weight: bold;
+        color: darkblue;
+      }
+
+      .footer {
+        color: darkgreen;
+        font-style: italic;
+      }
+    </style>
+
+    <div class="header">
+      <slot name="header"></slot>
+    </div>
+    <div class="body">
+      <p><slot></slot></p>
+    </div>
+    <div class="footer">
+      <slot name="footer"></slot>
+    </div>
+  </template>
+
+  <script>
+    class MyComponent extends HTMLElement {
+      constructor() {
+        super();
+        const template = document.getElementById('my-component-template');
+        const templateContent = template.content;
+        this.attachShadow({mode: 'open'}).appendChild(templateContent.cloneNode(true));
+
+        // Set text content and style from properties
+        const text = this.getAttribute('text');
+        const style = this.getAttribute('style');
+        
+        this.shadowRoot.querySelector('.body p').textContent = text;
+        this.style.cssText = style;
+      }
+    }
+
+    // Define the custom element
+    customElements.define('my-component', MyComponent);
+  </script>
 </body>
 </html>
