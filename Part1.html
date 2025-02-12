@@ -6,10 +6,11 @@
   <title>Custom Web Component</title>
 </head>
 <body>
-  <!-- Custom web component -->
+  <!-- Custom web component with attributes -->
   <my-component text="Hello, Web Component!" style="color: blue; font-size: 20px;">
-    <span slot="header">Header Slot Content</span>
-    <span slot="footer">Footer Slot Content</span>
+    <!-- Assign content to specific slots -->
+    <span slot="header">This is the header content</span>
+    <span slot="footer">This is the footer content</span>
   </my-component>
 
   <template id="my-component-template">
@@ -34,13 +35,18 @@
     </style>
 
     <div class="header">
-      <slot name="header"></slot>
+      <!-- Slot for header content -->
+      <slot name="header">Default Header</slot>
     </div>
     <div class="body">
-      <p><slot></slot></p>
+      <p>
+        <!-- Default content in body slot -->
+        <slot></slot>
+      </p>
     </div>
     <div class="footer">
-      <slot name="footer"></slot>
+      <!-- Slot for footer content -->
+      <slot name="footer">Default Footer</slot>
     </div>
   </template>
 
@@ -66,3 +72,4 @@
   </script>
 </body>
 </html>
+
