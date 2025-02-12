@@ -7,26 +7,20 @@
 </head>
 <body>
 
-<!-- Game Menu Web Component -->
 <my-component text="Welcome to the Adventure Game!" style="background-color: #222; color: #fff; font-size: 20px;">
-    <!-- Header Slot: Game Title / Logo -->
     <h1 slot="header">Adventure Game</h1>
-    
-    <!-- Body Slot: Game Options (Buttons) -->
+
     <div slot="body">
         <button>Start Game</button>
         <button>Settings</button>
         <button>High Scores</button>
     </div>
     
-    <!-- Footer Slot: Credits or Version Info -->
     <div slot="footer">
-        <p>Created by: Your Name</p>
-        <p>Version 1.0</p>
+        <p>Created by: Taka Kiucchi</p>
     </div>
 </my-component>
 
-<!-- Web Component Template -->
 <template id="my-component-template">
     <style>
         :host {
